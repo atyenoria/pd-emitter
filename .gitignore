@@ -1,0 +1,7 @@
+.bundle
+.ruby-version
+vendor/
+var/
+bin/stubs/*
+!bin/stubs/.gitkeep
+
