@@ -12,7 +12,11 @@ Deployed to `/opt/pd/emitter`
 
 chdir & bundle install
 
-### require deb ###
+### Requirements ###
+
+* Ruby 1.9 or higher
+
+### Require libs(deb) ###
 
 * libssl1.0.0 libncurses5 libreadline6 libtinfo5 libyaml-0-2 zlib1g
 
@@ -34,7 +38,12 @@ via CLI:
     # cd /opt/pd/emitter
     # [CONF="/path/of/pd-emitter_bootconf.json"] /opt/pd/bin/rake start
 
-NOTE: Example boot conf file = `/opt/pd/pd-emitter_bootconf.json`
+NOTE: _CONF_ enviromnent var is optional file. PD Emitter will work even if this file not present.
+
+CONFIG
+------
+
+see `conf/`. And [Fluentd configuration](http://docs.fluentd.org/articles/config-file).
 
 LOG
 ---
