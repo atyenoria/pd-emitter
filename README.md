@@ -16,29 +16,48 @@ chdir & bundle install
 
 * Ruby 1.9 or higher
 
-### Require libs(deb) ###
+### Require libs and commands(deb) ###
 
 * libssl1.0.0 libncurses5 libreadline6 libtinfo5 libyaml-0-2 zlib1g
+* build-essential git
 
 ### recommends deb ###
 
 * supervisor
 
-BOOTUP
-------
+### Example and BOOTUP ###
 
-via supervisord:
+In case of under debian 7.0 (wheezy) and using deb's ruby.
 
-    # apt-get install -y supervisor
-    # cp /opt/pd/emitter/share/pd-emitter_supervisord.conf /etc/supervisor/cond.d/pd-emitter.conf
-    # supervisorctl reload
+```
+$ sudo apt-get install -y ruby1.9.1-dev libssl1.0.0 libncurses5 libreadline6 libtinfo5 libyaml-0-2 zlib1g build-essential git
+$ sudo gem install bundle --no-rdoc --no-ri
+$ git clone https://github.com/plathome/pd-emitter.git /pd-emitter/deploy/dir
+$ cd /pd-emitter/deploy/dir
+$ bundle install --without development --path vendor/bundle
+$ bin/rake start
+## Stop is Ctrl+C
+```
 
-via CLI:
+```
+## In other terminal ...
+$ sudo apt-get install -y socat
+$ echo -n "MessageText" | socat stdin abstract-connect:/pd/stdout.sock
+## See PD Emitter startup terminal. Maybe display below...
+2015-05-10 10:44:52 +0900 pd.stdout.debug: {"data":"MessageText"}
+```
 
-    # cd /opt/pd/emitter
-    # [CONF="/path/of/pd-emitter_bootconf.json"] /opt/pd/bin/rake start
+BOOTUP via supervisord
+----------------------
 
-NOTE: _CONF_ enviromnent var is optional file. PD Emitter will work even if this file not present.
+```
+$ sudo apt-get install -y supervisor
+$ sudo cp /pd-emitter/deploy/dir/share/pd-emitter_supervisord.conf /etc/supervisor/cond.d/pd-emitter.conf
+## Adjust pd-emitter.conf (*)
+$ sudo supervisorctl reload
+```
+
+NOTE: pd-emitter.conf: Adjust `directory` and `command` directive in accordance with the your environment.
 
 CONFIG
 ------
