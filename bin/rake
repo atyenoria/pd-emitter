@@ -10,7 +10,6 @@ exec $RUBY -S -x "$0" "$@"
 #!ruby
 require 'pathname'
 ENV['BUNDLE_GEMFILE'] ||= File.expand_path("../../Gemfile", Pathname.new(__FILE__).realpath)
-ENV['BUNDLE_WITHOUT'] = 'development:test'
 require 'rubygems'
 begin
   require 'bundler/setup'
